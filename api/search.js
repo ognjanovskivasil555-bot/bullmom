@@ -1,7 +1,7 @@
 // api/search.js
 export const config = { runtime: 'edge' };
 
-const BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAANir%2BgEAAAAA4YTulXSnJ%2FQMrehQso8AX5oKrqc%3DCTE7SW1w5nrLP9Okz9vEyxz6LiVjjNiTGk7CDcyslaU5jAERHO";
+const BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAANir%2BgEAAAAAZH6dJaBgW84ytZufdhjFqqyLJrM%3DAQ884kkInlJHnZMoeTz23GtXXCUenm0jFWUooVyxb7XkVrQTPW";
 
 export default async function handler(req) {
   try {
