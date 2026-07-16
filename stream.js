@@ -10,14 +10,12 @@ export default async function handler(req) {
         const response = await fetch(
           "https://api.x.com/2/tweets/search/stream?tweet.fields=created_at",
           {
-            headers: {
-              Authorization: `Bearer ${BEARER_TOKEN}`,
-            },
+            headers: { Authorization: `Bearer ${BEARER_TOKEN}` },
           }
         );
 
         if (!response.ok) {
-          controller.enqueue(`data: ${JSON.stringify({ error: "Stream connection failed" })}\n\n`);
+          controller.enqueue(`data: ${JSON.stringify({ error: "Stream failed" })}\n\n`);
           return;
         }
 
@@ -29,13 +27,11 @@ export default async function handler(req) {
           if (done) break;
 
           const chunk = decoder.decode(value);
-          const lines = chunk.split("\n").filter(Boolean);
-
-          for (const line of lines) {
+          for (const line of chunk.split("\n")) {
             if (line.startsWith("data:")) {
               try {
                 const data = JSON.parse(line.replace("data:", "").trim());
-                if (data.data && data.data.text) {
+                if (data.data?.text) {
                   controller.enqueue(
                     `data: ${JSON.stringify({
                       text: data.data.text,
