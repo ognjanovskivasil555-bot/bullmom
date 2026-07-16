@@ -93,11 +93,28 @@
       if (postsContainer.children.length > 8) postsContainer.lastChild.remove();
     }
 
+    // Load previous $BULLMOM posts
+    async function loadPreviousPosts() {
+      try {
+        const res = await fetch('/api/search');
+        const data = await res.json();
+        if (data.posts && data.posts.length > 0) {
+          data.posts.forEach(post => addPost(post));
+        }
+      } catch (e) {
+        console.log("Could not load previous posts");
+      }
+    }
+
+    // Live stream from filtered stream
     const eventSource = new EventSource('/api/stream');
     eventSource.onmessage = function(event) {
       const post = JSON.parse(event.data);
       if (post.text) addPost(post);
     };
+
+    // Load previous posts when page opens
+    loadPreviousPosts();
   </script>
 </body>
 </html>
