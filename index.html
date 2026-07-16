@@ -11,7 +11,6 @@
     .meme-font { font-family: "Press Start 2P", system-ui; }
     .post-card { transition: all 0.3s ease; }
     .post-card:hover { transform: translateY(-4px); box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
-    .neon-text { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700; }
     .ca-box { font-family: monospace; }
   </style>
 </head>
@@ -46,8 +45,7 @@
         <div class="text-[10px] text-yellow-500/60 mt-1">Click to copy</div>
       </div>
 
-      <a href="https://pump.fun/coin/4mzZ3oMXchsPpc3g7YD6Yn6HP8zEbaSviwCVA9khpump" 
-         target="_blank"
+      <a href="https://pump.fun/coin/4mzZ3oMXchsPpc3g7YD6Yn6HP8zEbaSviwCVA9khpump" target="_blank"
          class="inline-block bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-lg px-10 py-4 rounded-2xl transition-all active:scale-95">
         BUY NOW ON PUMP.FUN →
       </a>
@@ -95,7 +93,6 @@
       if (postsContainer.children.length > 8) postsContainer.lastChild.remove();
     }
 
-    // Connect to your backend stream
     const eventSource = new EventSource('/api/stream');
     eventSource.onmessage = function(event) {
       const post = JSON.parse(event.data);
