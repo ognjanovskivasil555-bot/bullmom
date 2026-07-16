@@ -93,12 +93,10 @@
       if (postsContainer.children.length > 8) postsContainer.lastChild.remove();
     }
 
-    // Load recent posts from @helenahseva
     async function loadPreviousPosts() {
       try {
         const res = await fetch('/api/search');
         const data = await res.json();
-        
         console.log("Search response:", data);
 
         if (data.error) {
@@ -116,7 +114,6 @@
       }
     }
 
-    // Live stream
     const eventSource = new EventSource('/api/stream');
     eventSource.onmessage = function(event) {
       const post = JSON.parse(event.data);
