@@ -93,13 +93,13 @@
       if (postsContainer.children.length > 8) postsContainer.lastChild.remove();
     }
 
-    // Load previous $BULLMOM posts (with debugging)
+    // Load recent posts from @helenahseva
     async function loadPreviousPosts() {
       try {
         const res = await fetch('/api/search');
         const data = await res.json();
         
-        console.log("Search response:", data); // ← Check browser console (F12)
+        console.log("Search response:", data);
 
         if (data.error) {
           console.error("Search error:", data.error);
@@ -109,7 +109,7 @@
         if (data.posts && data.posts.length > 0) {
           data.posts.forEach(post => addPost(post));
         } else {
-          console.log("No previous $BULLMOM posts found");
+          console.log("No recent posts found");
         }
       } catch (e) {
         console.error("Failed to load previous posts:", e);
@@ -123,7 +123,6 @@
       if (post.text) addPost(post);
     };
 
-    // Load previous posts when page opens
     loadPreviousPosts();
   </script>
 </body>
