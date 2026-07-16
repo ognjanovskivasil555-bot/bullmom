@@ -6,7 +6,7 @@ const BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAANir%2BgEAAAAA4YTulXSnJ%2FQMrehQso8AX5
 export default async function handler(req) {
   try {
     const query = encodeURIComponent('from:helenahseva');
-    const url = `https://api.x.com/2/tweets/search/recent?query=${query}&tweet.fields=created_at&max_results=8`;
+    const url = `https://api.x.com/2/tweets/search/recent?query=${query}&tweet.fields=created_at&max_results=10`;
 
     const response = await fetch(url, {
       headers: { Authorization: `Bearer ${BEARER_TOKEN}` },
