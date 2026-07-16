@@ -1,0 +1,17 @@
+{
+  "name": "bullmom",
+  "version": "1.0.0",
+  "description": "The Most Based The Bull Mom on Solana",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build step required'",
+    "lint": "echo 'No linter configured'"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.1.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
