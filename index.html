@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$BULLMOM 🐂 | The Most Based Bull Mom</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    body { background: #0a0a0a; color: #fff; }
+    .meme-font { font-family: "Press Start 2P", system-ui; }
+    .post-card { transition: all 0.3s ease; }
+    .post-card:hover { transform: translateY(-4px); box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+    .neon-text { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700; }
+    .ca-box { font-family: monospace; }
+  </style>
+</head>
+<body class="bg-zinc-950">
+  <!-- Header -->
+  <div class="border-b border-yellow-500/30 bg-black/60">
+    <div class="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div class="flex items-center gap-x-4">
+        <div class="text-5xl">🐂</div>
+        <div>
+          <h1 class="meme-font text-3xl font-bold text-yellow-400">$BULLMOM</h1>
+          <p class="text-yellow-500 text-xs tracking-widest">THE MOST BASED BULL MOM ON SOLANA</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-x-4 text-sm">
+        <a href="https://x.com/home" target="_blank" class="hover:text-yellow-400">Twitter</a>
+        <a href="https://pump.fun/go/83b2ce4e-5e96-47e2-a29e-d316b7beee64" target="_blank" class="hover:text-yellow-400">Bounty</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-5xl mx-auto px-6 py-10">
+    <!-- Hero -->
+    <div class="text-center mb-12">
+      <div class="inline px-4 py-1 bg-yellow-400 text-black text-xs font-bold rounded-full mb-4">OFFICIAL BULLMOM</div>
+      <h2 class="meme-font text-6xl mb-2">WELCOME TO THE<br>BULL PEN 🏠</h2>
+      <p class="text-xl text-yellow-400 mb-8">Stay Based. Stay Bullish.</p>
+
+      <!-- Contract Address -->
+      <div class="max-w-md mx-auto mb-6">
+        <div class="text-sm text-yellow-500 mb-2">CONTRACT ADDRESS</div>
+        <div onclick="copyCA()" class="ca-box cursor-pointer bg-zinc-900 border border-yellow-500/30 hover:border-yellow-400 px-6 py-4 rounded-2xl text-yellow-400 text-sm break-all">
+          4mzZ3oMXchsPpc3g7YD6Yn6HP8zEbaSviwCVA9khpump
+        </div>
+        <div class="text-[10px] text-yellow-500/60 mt-1">Click to copy</div>
+      </div>
+
+      <!-- Buy Button -->
+      <a href="https://pump.fun/coin/4mzZ3oMXchsPpc3g7YD6Yn6HP8zEbaSviwCVA9khpump" 
+         target="_blank"
+         class="inline-block bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-lg px-10 py-4 rounded-2xl transition-all active:scale-95">
+        BUY NOW ON PUMP.FUN →
+      </a>
+    </div>
+
+    <!-- Live Feed -->
+    <div class="mb-6 flex items-center justify-between max-w-2xl mx-auto">
+      <div class="flex items-center gap-x-3">
+        <div class="text-3xl">📡</div>
+        <div>
+          <div class="font-bold text-xl">LIVE FROM X</div>
+          <div class="text-sm text-yellow-500/60">@yourhandle</div>
+        </div>
+      </div>
+      <div class="text-xs px-3 py-1 bg-white/10 rounded-full">Real-time</div>
+    </div>
+
+    <!-- Posts -->
+    <div id="posts" class="space-y-4 max-w-2xl mx-auto"></div>
+  </div>
+
+  <script>
+    function copyCA() {
+      navigator.clipboard.writeText("4mzZ3oMXchsPpc3g7YD6Yn6HP8zEbaSviwCVA9khpump");
+      alert("CA copied to clipboard!");
+    }
+
+    const postsContainer = document.getElementById('posts');
+
+    function addPost(post) {
+      const div = document.createElement('div');
+      div.className = `post-card bg-zinc-900 border border-yellow-500/20 rounded-2xl p-5`;
+      div.innerHTML = `
+        <div class="flex gap-x-4">
+          <div class="text-4xl">🐂</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-x-2 mb-1">
+              <span class="font-bold">@yourhandle</span>
+              <span class="text-[10px] px-2 py-0.5 bg-yellow-400 text-black rounded">BASED</span>
+            </div>
+            <p class="text-lg">${post.text}</p>
+            <div class="text-xs text-yellow-500/60 mt-3">${new Date(post.created_at).toLocaleTimeString()}</div>
+          </div>
+        </div>
+      `;
+      postsContainer.prepend(div);
+      if (postsContainer.children.length > 8) postsContainer.lastChild.remove();
+    }
+
+    // Connect to your stream
+    const eventSource = new EventSource('/api/stream');
+    eventSource.onmessage = function(event) {
+      const post = JSON.parse(event.data);
+      if (post.text) addPost(post);
+    };
+  </script>
+</body>
+</html>
