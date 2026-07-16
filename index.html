@@ -93,20 +93,30 @@
       if (postsContainer.children.length > 8) postsContainer.lastChild.remove();
     }
 
-    // Load previous $BULLMOM posts
+    // Load previous $BULLMOM posts (with debugging)
     async function loadPreviousPosts() {
       try {
         const res = await fetch('/api/search');
         const data = await res.json();
+        
+        console.log("Search response:", data); // ← Check browser console (F12)
+
+        if (data.error) {
+          console.error("Search error:", data.error);
+          return;
+        }
+
         if (data.posts && data.posts.length > 0) {
           data.posts.forEach(post => addPost(post));
+        } else {
+          console.log("No previous $BULLMOM posts found");
         }
       } catch (e) {
-        console.log("Could not load previous posts");
+        console.error("Failed to load previous posts:", e);
       }
     }
 
-    // Live stream from filtered stream
+    // Live stream
     const eventSource = new EventSource('/api/stream');
     eventSource.onmessage = function(event) {
       const post = JSON.parse(event.data);
