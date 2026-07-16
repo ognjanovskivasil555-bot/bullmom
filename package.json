@@ -1,0 +1,22 @@
+{
+  "name": "bullmom",
+  "version": "1.0.0",
+  "description": "$BULLMOM - The Most Based The Bull Mom on Solana",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'",
+    "test": "echo \"No tests specified\""
+  },
+  "keywords": [
+    "bullmom",
+    "solana",
+    "crypto"
+  ],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.34.3",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
