@@ -1,8 +1,9 @@
+// api/stream.js
 export const config = { runtime: 'edge' };
 
-export default async function handler(req) {
-  const BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAIyg%2BgEAAAAATNIpxV8HdwKrMpuIq7%2FEkfe0pwI%3D3SVm6M3c4gDOihuPElZNvh8ZWZsJsYOPBbT915nHz7H12keU34";
+const BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAIyg%2BgEAAAAATNIpxV8HdwKrMpuIq7%2FEkfe0pwI%3D3SVm6M3c4gDOihuPElZNvh8ZWZsJsYOPBbT915nHz7H12keU34";
 
+export default async function handler(req) {
   const stream = new ReadableStream({
     async start(controller) {
       try {
@@ -34,7 +35,7 @@ export default async function handler(req) {
             if (line.startsWith("data:")) {
               try {
                 const data = JSON.parse(line.replace("data:", "").trim());
-                if (data.data) {
+                if (data.data && data.data.text) {
                   controller.enqueue(
                     `data: ${JSON.stringify({
                       text: data.data.text,
